@@ -21,9 +21,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
-    private String email;
+    private String login;
+    private String nickname;
     private String password;
     private byte[] salt;
+
+    @ManyToMany
+    @JoinTable(name = "groups_users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    Set<ChatGroup> chatGroups;
 
     @ManyToMany
     @JoinTable(name = "users_roles",
@@ -35,7 +42,8 @@ public class User {
     public String toString() {
         return "User{"
                 + "id=" + id
-                + ", email='" + email + '\''
-                + '}';
+                + ", login='" + login + "'"
+                + ", nickname='" + nickname
+                + "}";
     }
 }
