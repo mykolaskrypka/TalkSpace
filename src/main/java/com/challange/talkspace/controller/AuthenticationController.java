@@ -5,6 +5,7 @@ import com.challange.talkspace.dto.response.UserResponseDto;
 import com.challange.talkspace.model.User;
 import com.challange.talkspace.service.AuthenticationService;
 import com.challange.talkspace.service.mapper.ResponseDtoMapper;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,9 +28,14 @@ public class AuthenticationController {
         return userDtoResponseMapper.mapToDto(user);
     }
 
-    @PostMapping("/injectUser")
-    public UserResponseDto injectUser(@RequestBody @Valid UserRequestDto requestDto) {
+    @GetMapping("/injectUser")
+    public UserResponseDto injectUser() {
         User user = authService.register("user1", "12345");
         return userDtoResponseMapper.mapToDto(user);
+    }
+
+    @GetMapping("/getHello")
+    public String getHello() {
+        return "Hello world!!!";
     }
 }
