@@ -10,13 +10,13 @@ import javax.validation.constraints.Size;
         message = "Passwords do not match!"
 )
 public class UserRequestDto {
-    private String email;
+    private String login;
     @Size(min = 5, max = 40)
     private String password;
     private String repeatPassword;
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
     public String getPassword() {

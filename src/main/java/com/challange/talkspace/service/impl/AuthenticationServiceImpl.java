@@ -20,9 +20,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User register(String email, String password) {
+    public User register(String login, String password) {
         User user = new User();
-        user.setEmail(email);
+        user.setLogin(login);
         user.setPassword(password);
         user.setRoles(Set.of(roleService.getByName("USER")));
         userService.add(user);

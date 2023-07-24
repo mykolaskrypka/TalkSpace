@@ -13,10 +13,10 @@ public class ChatType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(value = EnumType.STRING)
-    private TypeName typeName;
+    private ChatTypeName chatTypeName;
 
-    public ChatType(TypeName typeName) {
-        this.typeName = typeName;
+    public ChatType(ChatTypeName typeName) {
+        this.chatTypeName = typeName;
     }
 
     public ChatType() {
@@ -31,15 +31,15 @@ public class ChatType {
             return false;
         }
         ChatType chatType = (ChatType) o;
-        return id.equals(chatType.id) && typeName == chatType.typeName;
+        return id.equals(chatType.id) && chatTypeName == chatType.chatTypeName;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, typeName);
+        return Objects.hash(id, chatTypeName);
     }
 
-    public enum TypeName {
+    public enum ChatTypeName {
         GROUP,
         PRIVATE
     }

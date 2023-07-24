@@ -1,25 +1,25 @@
 package com.challange.talkspace.service.impl;
 
-import com.challange.talkspace.dao.RoleDao;
 import com.challange.talkspace.model.Role;
+import com.challange.talkspace.repository.RoleRepository;
 import com.challange.talkspace.service.RoleService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RoleServiceImpl implements RoleService {
-    private final RoleDao roleDao;
+    private final RoleRepository roleRepository;
 
-    public RoleServiceImpl(RoleDao roleDao) {
-        this.roleDao = roleDao;
+    public RoleServiceImpl(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public Role add(Role role) {
-        return roleDao.add(role);
+        return roleRepository.save(role);
     }
 
     @Override
     public Role getByName(String roleName) {
-        return roleDao.getByName(Role.RoleName.valueOf(roleName)).get();
+        return roleRepository.findByRoleName(Role.RoleName.valueOf(roleName).toString());
     }
 }
