@@ -1,9 +1,9 @@
 package com.challange.talkspace.service;
 
-import com.challange.talkspace.model.Role;
+import com.challange.talkspace.model.ChatType;
 
-public interface RoleService {
-    Role add(Role role);
+public interface ChatTypeService {
+    ChatType add(ChatType chatType);
 
-    Role getByName(String roleName);
+    ChatType getByName(String chatTypeName);
 }
