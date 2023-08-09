@@ -29,11 +29,18 @@ public class UserController {
         return userResponseDtoMapper.mapToDto(user);
     }
 
-    @GetMapping("/injectUser")
+    @GetMapping("/injectUser2")
     public UserResponseDto injectUser() {
         User user = new User();
         user.setLogin("User2");
         user.setPassword("123456");
         return userResponseDtoMapper.mapToDto(userService.add(user));
+    }
+
+    @GetMapping("/getUser2")
+    public UserResponseDto getUser2() {
+        User user = userService.findByLogin("User2").orElseThrow(
+                () -> new RuntimeException("User with login " + "User2" + " not found"));
+        return userResponseDtoMapper.mapToDto(user);
     }
 }
