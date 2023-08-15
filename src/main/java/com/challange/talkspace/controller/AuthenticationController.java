@@ -30,6 +30,6 @@ public class AuthenticationController {
 
     @GetMapping("/getHello")
     public String getHello() {
-        return "Hello world!!!";
+        return "Hello, TalkSpacers!!!";
     }
 }
