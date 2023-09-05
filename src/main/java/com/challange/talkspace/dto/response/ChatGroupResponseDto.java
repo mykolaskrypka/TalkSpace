@@ -1,7 +1,7 @@
 package com.challange.talkspace.dto.response;
 
 import com.challange.talkspace.model.ChatType;
-import com.challange.talkspace.model.User;
+import com.challange.talkspace.model.Person;
 import lombok.Data;
 
 import java.util.Set;
@@ -12,6 +12,6 @@ public class ChatGroupResponseDto {
     private String name;
     private String description;
     private ChatType chatType;
-    Set<User> users;
+    Set<Person> people;
 
 }
