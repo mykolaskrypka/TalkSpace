@@ -8,6 +8,7 @@ import com.challange.talkspace.service.ChatGroupService;
 import com.challange.talkspace.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -28,6 +29,11 @@ public class ChatGroupServiceImpl implements ChatGroupService {
     public ChatGroup get(Long id) {
         return chatGroupRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Chat group with id " + id + " not found"));
+    }
+
+    @Override
+    public List<ChatGroup> findAll() {
+        return chatGroupRepository.findAll();
     }
 
     @Override

@@ -12,6 +12,9 @@ import com.challange.talkspace.service.mapper.RequestDtoMapper;
 import com.challange.talkspace.service.mapper.ResponseDtoMapper;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/chat-groups")
 public class ChatGroupController {
@@ -32,6 +35,18 @@ public class ChatGroupController {
         ChatGroup chatGroup = chatGroupRequestDtoMapper.mapToModel(chatGroupRequestDto);
         chatGroupService.add(chatGroup);
         return chatGroupResponseDtoMapper.mapToDto(chatGroup);
+    }
+
+    @GetMapping("/get-all")
+    public Set<ChatGroupResponseDto> getAll() {
+        return chatGroupService.findAll().stream()
+                .map((c) -> chatGroupResponseDtoMapper.mapToDto(c))
+                .collect(Collectors.toSet());
+    }
+
+    @GetMapping("/{id}")
+    public ChatGroupResponseDto getById(@RequestParam Long id) {
+        return chatGroupResponseDtoMapper.mapToDto(chatGroupService.get(id));
     }
 
 }

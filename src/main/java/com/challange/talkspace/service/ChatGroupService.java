@@ -2,12 +2,16 @@ package com.challange.talkspace.service;
 
 import com.challange.talkspace.model.ChatGroup;
 import com.challange.talkspace.model.User;
+
+import java.util.List;
 import java.util.Set;
 
 public interface ChatGroupService {
     ChatGroup add(ChatGroup chatGroup);
 
     ChatGroup get(Long id);
+
+    List<ChatGroup> findAll();
 
     Set<ChatGroup> findByUser(User user);
 
