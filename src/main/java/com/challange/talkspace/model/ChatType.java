@@ -2,11 +2,17 @@ package com.challange.talkspace.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
 @Data
 @Entity
+@EqualsAndHashCode
+@Getter
+@Setter
 @Table(name = "chat_types")
 public class ChatType {
     @Id
@@ -22,22 +28,6 @@ public class ChatType {
     public ChatType() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ChatType chatType = (ChatType) o;
-        return id.equals(chatType.id) && chatTypeName == chatType.chatTypeName;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, chatTypeName);
-    }
 
     public enum ChatTypeName {
         GROUP,
