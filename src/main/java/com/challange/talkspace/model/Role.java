@@ -29,7 +29,6 @@ public class Role {
     public Role() {
     }
 
-
     public enum RoleName {
         ADMIN,
         USER
