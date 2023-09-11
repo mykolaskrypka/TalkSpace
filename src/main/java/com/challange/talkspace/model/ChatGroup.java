@@ -20,14 +20,17 @@ public class ChatGroup {
     private Long id;
 
     private String name;
+
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Person person;
+
     @ManyToOne
     @JoinColumn(name = "chat_type_id")
     private ChatType chatType;
+
     @ManyToMany(mappedBy = "chatGroups")
     Set<Person> people;
 

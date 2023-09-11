@@ -25,5 +25,4 @@ public class TalkSpaceApplication {
         SpringApplication.run(TalkSpaceApplication.class, args);
     }
 
-
 }

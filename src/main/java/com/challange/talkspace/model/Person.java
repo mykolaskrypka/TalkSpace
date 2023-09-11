@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -15,12 +17,13 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(of = ("id"))
 public class Person {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    //private String login;
+    @Column
+    private String login;
     @Column(unique = true, nullable = false)
     private String userName;
     @Column
@@ -29,7 +32,12 @@ public class Person {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-    //private byte[] salt;
+
+//    @OneToMany(mappedBy = "sender")
+//    private List <Message> senderMessage = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "receiver")
+//    private List<Message> receiverMessage = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "groups_users",
@@ -45,18 +53,9 @@ public class Person {
 
     public static Person of(String userName, String password, Role role) {
         Person person = new Person();
-        person.userName=userName;
-        person.password=password;
-        person.role=role;
+        person.userName = userName;
+        person.password = password;
+        person.role = role;
         return person;
-
     }
-
-//    @Override
-//    public String toString() {
-//        return "User{"
-//                + "id=" + id
-//                + ", nickname='" + nickName
-//                + "}";
-//    }
 }
