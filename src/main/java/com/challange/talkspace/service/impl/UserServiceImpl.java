@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> optionalUser = userRepository.findByUserName(login);
         if (!optionalUser.isPresent()) {
-            throw new UsernameNotFoundException("User with login " + login + "do not exists");
+            throw new UsernameNotFoundException("User with login " + login + " do not exists");
         }
         return optionalUser;
     }

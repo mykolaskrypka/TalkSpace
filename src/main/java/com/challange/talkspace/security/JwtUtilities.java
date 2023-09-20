@@ -1,9 +1,11 @@
 package com.challange.talkspace.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
-
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -23,6 +24,7 @@ import java.util.function.Function;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class JwtUtilities {
 
     @Value("${jwt.secret}")
@@ -31,27 +33,26 @@ public class JwtUtilities {
     @Value("${jwt.expiration}")
     private Long jwtExpiration;
 
-    @PostConstruct
-    protected void init() {
-        secret = Base64.getEncoder().encodeToString(secret.getBytes());
+    private CustomUserDetailsService customUserDetailsService;
+
+    public Optional<String> extractUsername(String token) {
+        return Optional.ofNullable(extractClaim(token, DecodedJWT::getSubject));
     }
 
-    private CustomUserDetailsService userDetailsService;
-
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+    public DecodedJWT extractAllClaims(String token) {
+        return JWT.require(Algorithm.HMAC256(secret))
+                .build()
+                .verify(token);
     }
 
-    public Claims extractAllClaims(String token) {return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();}
-
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
+    public <T> T extractClaim(String token, Function<DecodedJWT, T> claimsResolver) {
+        final DecodedJWT decodedJWT = extractAllClaims(token);
+        return claimsResolver.apply(decodedJWT);
     }
-    public Date extractExpiration(String token) { return extractClaim(token, Claims::getExpiration); }
+    public Date extractExpiration(String token) { return extractClaim(token, DecodedJWT::getExpiresAt); }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
+        final String username = extractUsername(token).get();
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
     public Boolean isTokenExpired(String token) {
@@ -59,7 +60,7 @@ public class JwtUtilities {
     }
 
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(extractUsername(token));
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername(extractUsername(token).get());
         return new UsernamePasswordAuthenticationToken(userDetails, "",
                 userDetails.getAuthorities());
     }
@@ -72,11 +73,15 @@ public class JwtUtilities {
                 //.withClaim("un", userName)
                 .withClaim("roles", roles)
                 .sign(Algorithm.HMAC256(secret));
-//        return Jwts.builder().setSubject(email).claim("role",roles).setIssuedAt(new Date(System.currentTimeMillis()))
-//                .setExpiration(Date.from(Instant.now().plus(jwtExpiration, ChronoUnit.MILLIS)))
-//                .signWith(SignatureAlgorithm.HS256, secret).compact();
     }
 
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        final Optional<String> optionalUserName = extractUsername(token);
+        return optionalUserName
+                .filter(s -> (s.equals(userDetails.getUsername()))
+                        && !isTokenExpired(token))
+                .isPresent();
+    }
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
@@ -107,4 +112,5 @@ public class JwtUtilities {
         } // The part after "Bearer "
         return Optional.empty();
     }
+
 }

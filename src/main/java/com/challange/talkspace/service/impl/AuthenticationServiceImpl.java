@@ -7,6 +7,7 @@ import com.challange.talkspace.service.RoleService;
 import com.challange.talkspace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -15,12 +16,11 @@ import java.util.Set;
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserService userService;
     private final RoleService roleService;
-
-    private final BCryptPasswordEncoder encoder;
+    private final PasswordEncoder encoder;
 
     @Autowired
     public AuthenticationServiceImpl(UserService userService,
-                                     RoleService roleService, BCryptPasswordEncoder encoder) {
+                                     RoleService roleService, PasswordEncoder encoder) {
         this.userService = userService;
         this.roleService = roleService;
         this.encoder = encoder;

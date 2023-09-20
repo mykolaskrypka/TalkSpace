@@ -11,10 +11,6 @@ import org.springframework.web.client.RestTemplate;
 //@EnableAspectJAutoProxy
 public class TalkSpaceApplication {
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
 //    @Bean
 //    public RestTemplate getTemplate() {

@@ -1,10 +1,7 @@
 package com.challange.talkspace.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Set;
 
@@ -13,7 +10,7 @@ import java.util.Set;
 @Table(name = "users")
 @Getter
 @Setter
-@EqualsAndHashCode(of = ("id"))
+//@EqualsAndHashCode(of = ("id"))
 public class User {
 
     @Id
@@ -38,6 +35,8 @@ public class User {
 //    @OneToMany(mappedBy = "receiver")
 //    private List<Message> receiverMessage = new ArrayList<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany
     @JoinTable(name = "groups_users",
             joinColumns = @JoinColumn(name = "user_id"),
