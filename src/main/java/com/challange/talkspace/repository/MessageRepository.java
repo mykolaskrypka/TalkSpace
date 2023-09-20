@@ -19,7 +19,7 @@ public interface MessageRepository   extends JpaRepository<Message, Long> {
     @Transactional (readOnly = true)
     @Query(nativeQuery = true, value = "select * from message m where m.sender_id=:id")
     List<Message> findMySuperPostsNative( long id);
-    List<Message> findAllByUnread(boolean unread);
+    //List<Message> findAllByStatusTrue();
     @Query(value = "SELECT * FROM message WHERE id > :id", nativeQuery = true)
     List<Message> getUnreadById(@Param("id") long id);
 

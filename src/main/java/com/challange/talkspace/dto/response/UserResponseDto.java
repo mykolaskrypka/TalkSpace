@@ -2,7 +2,7 @@ package com.challange.talkspace.dto.response;
 
 public class UserResponseDto {
     private Long id;
-    private String login;
+    private String userName;
 
     public Long getId() {
         return id;
@@ -12,11 +12,11 @@ public class UserResponseDto {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

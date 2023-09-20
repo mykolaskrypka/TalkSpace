@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class ChatNotificaton {
     private Long id;
     private Long senderId;
-    private Person sender;
+    private User sender;
 }

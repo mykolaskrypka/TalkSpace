@@ -1,6 +1,8 @@
 package com.challange.talkspace.service;
 
 import com.challange.talkspace.model.User;
+
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -8,5 +10,7 @@ public interface UserService {
 
     User get(Long id);
 
-    Optional<User> findByLogin(String login);
+    Optional<User> findByUserName(String userName);
+
+    List<User> findAll();
 }

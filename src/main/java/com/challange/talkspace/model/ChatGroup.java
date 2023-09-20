@@ -25,13 +25,13 @@ public class ChatGroup {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Person person;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "chat_type_id")
     private ChatType chatType;
 
     @ManyToMany(mappedBy = "chatGroups")
-    Set<Person> people;
+    Set<User> people;
 
 }

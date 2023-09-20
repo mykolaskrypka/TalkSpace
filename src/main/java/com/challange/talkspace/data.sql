@@ -3,7 +3,7 @@ VALUES ('PRIVATE'),
        ('GROUP');
 
 
-Insert Into "person" ("userName", login, password, role)
+Insert Into "user" ("userName", login, password, role)
 VALUES ('Nataly', 'Nat', 111,2),
        ('Mykola', 'Mykola', 111, 1);
 

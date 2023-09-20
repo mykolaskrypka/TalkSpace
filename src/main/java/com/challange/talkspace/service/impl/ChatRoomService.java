@@ -1,4 +1,4 @@
-package com.challange.talkspace.model.service;
+package com.challange.talkspace.service.impl;
 
 import com.challange.talkspace.model.ChatRoom;
 import com.challange.talkspace.repository.ChatRoomRepository;

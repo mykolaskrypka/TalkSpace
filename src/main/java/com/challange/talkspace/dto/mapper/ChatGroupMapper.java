@@ -1,4 +1,4 @@
-package com.challange.talkspace.service.mapper;
+package com.challange.talkspace.dto.mapper;
 
 import com.challange.talkspace.dto.request.ChatGroupRequestDto;
 import com.challange.talkspace.dto.response.ChatGroupResponseDto;
@@ -15,7 +15,7 @@ public class ChatGroupMapper implements ResponseDtoMapper<ChatGroupResponseDto, 
         responseDto.setChatType(chatGroup.getChatType());
         responseDto.setName(chatGroup.getName());
         responseDto.setDescription(chatGroup.getDescription());
-        responseDto.setUsers(chatGroup.getUsers());
+        responseDto.setPeople(chatGroup.getPeople());
         return responseDto;
     }
 
@@ -25,7 +25,7 @@ public class ChatGroupMapper implements ResponseDtoMapper<ChatGroupResponseDto, 
         chatGroup.setChatType(chatGroupRequestDto.getChatType());
         chatGroup.setName(chatGroupRequestDto.getName());
         chatGroup.setDescription(chatGroupRequestDto.getDescription());
-        chatGroup.setUsers(chatGroupRequestDto.getUsers());
+        chatGroup.setPeople(chatGroupRequestDto.getPeople());
         return chatGroup;
     }
 }

@@ -1,8 +1,9 @@
 package com.challange.talkspace.service.impl;
 
 import com.challange.talkspace.model.ChatType;
-import com.challange.talkspace.repository.ChatTypeRepository;
 import com.challange.talkspace.service.ChatTypeService;
+import com.challange.talkspace.repository.ChatTypeRepository;
+
 import org.springframework.stereotype.Service;
 
 @Service

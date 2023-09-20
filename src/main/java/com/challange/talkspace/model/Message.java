@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,14 +24,14 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "userSender_id", insertable = false, updatable = false)
-    private Person sender;
+    private User sender;
 
 
     private Long senderId;
 
     @ManyToOne
     @JoinColumn(name = "userRecipient_id",insertable = false, updatable = false)
-    private Person recipient;
+    private User recipient;
 
 
     private Long recipientId;
@@ -62,7 +61,7 @@ public class Message {
         this.timestamp = LocalDateTime.now();
     }
 
-    public static Message of(Person sender, String content, ChatGroup chatGroup) {
+    public static Message of(User sender, String content, ChatGroup chatGroup) {
         Message message = new Message();
         message.sender = sender;
         message.content = content;
@@ -70,7 +69,7 @@ public class Message {
         return message;
     }
 
-    public void setSender(Person sender) {
+    public void setSender(User sender) {
         this.sender = sender;
     }
 }

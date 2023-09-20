@@ -2,22 +2,14 @@ package com.challange.talkspace.controller;
 
 import com.challange.talkspace.model.ChatNotificaton;
 import com.challange.talkspace.model.Message;
-import com.challange.talkspace.model.service.ChatRoomService;
-import com.challange.talkspace.model.service.MessageService;
-import com.challange.talkspace.repository.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.challange.talkspace.service.impl.ChatRoomService;
+import com.challange.talkspace.service.impl.MessageService;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/messages")
@@ -46,13 +38,13 @@ public class MessageController {
                         saved.getSender()));
     }
 
-    @MessageMapping("/chat.sendMessage")
+    @MessageMapping("/sendMessage")
     @SendTo("/topic/public")
     public Message sendMessage(@Payload Message message) {
         return message;
     }
 
-    @MessageMapping("/chat.addUser")
+    @MessageMapping("/addUser")
     @SendTo("/topic/public")
     public Message addUser(@Payload Message message,
                                SimpMessageHeaderAccessor headerAccessor) {

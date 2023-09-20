@@ -2,12 +2,12 @@ package com.challange.talkspace.dto.request;
 
 import java.time.LocalDateTime;
 
-import com.challange.talkspace.model.Person;
+import com.challange.talkspace.model.User;
 import lombok.Data;
 
 @Data
 public class MessageRequestDto {
-    private Person sender;
+    private User sender;
     private String content;
     private LocalDateTime timestamp;
 

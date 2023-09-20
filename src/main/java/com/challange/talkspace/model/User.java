@@ -6,17 +6,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "person")
+@Table(name = "users")
 @Getter
 @Setter
 @EqualsAndHashCode(of = ("id"))
-public class Person {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +27,10 @@ public class Person {
     @Column
     private String password;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+*/
 
 //    @OneToMany(mappedBy = "sender")
 //    private List <Message> senderMessage = new ArrayList<>();
@@ -43,19 +42,19 @@ public class Person {
     @JoinTable(name = "groups_users",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id"))
-    Set<ChatGroup> chatGroups;
+    private Set<ChatGroup> chatGroups;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user"),
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public static Person of(String userName, String password, Role role) {
-        Person person = new Person();
-        person.userName = userName;
-        person.password = password;
-        person.role = role;
-        return person;
+    public static User of(String userName, String password, Role role) {
+        User user = new User();
+        user.userName = userName;
+        user.password = password;
+        user.roles = Set.of(role);
+        return user;
     }
 }

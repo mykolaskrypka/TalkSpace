@@ -2,8 +2,8 @@ package com.challange.talkspace;
 
 import com.challange.talkspace.model.ChatType;
 import com.challange.talkspace.model.Role;
-import com.challange.talkspace.model.service.ChatTypeService;
-import com.challange.talkspace.model.service.RoleService;
+import com.challange.talkspace.service.ChatTypeService;
+import com.challange.talkspace.service.RoleService;
 import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 

@@ -1,8 +1,9 @@
 package com.challange.talkspace.service.impl;
 
 import com.challange.talkspace.model.Role;
-import com.challange.talkspace.repository.RoleRepository;
 import com.challange.talkspace.service.RoleService;
+import com.challange.talkspace.repository.RoleRepository;
+
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,5 +1,5 @@
 
-create table person
+create table user
 (
     id         serial
         primary key,

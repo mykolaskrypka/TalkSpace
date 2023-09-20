@@ -1,7 +1,7 @@
 package com.challange.talkspace.controller;
 
-import com.challange.talkspace.model.Person;
-import com.challange.talkspace.repository.PersonRepository;
+import com.challange.talkspace.model.User;
+import com.challange.talkspace.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,51 +15,51 @@ import java.util.stream.StreamSupport;
 @RequestMapping("/people")
 public class PersonController {
 
-    private final PersonRepository personRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public PersonController(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public PersonController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/")
-    public List<Person> getAll() {
-        return StreamSupport.stream(personRepository.findAll().spliterator(), false)
+    public List<User> getAll() {
+        return StreamSupport.stream(userRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Person> getById(@PathVariable("id") long id) {
-        var person = personRepository.findById( id);
+    public ResponseEntity<User> getById(@PathVariable("id") long id) {
+        var person = userRepository.findById( id);
 
         return new ResponseEntity<>(
-                person.orElse(new Person()),
+                person.orElse(new User()),
                 person.isPresent() ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Person> create(@RequestBody Person person) {
+    public ResponseEntity<User> create(@RequestBody User user) {
         return new ResponseEntity<>(
-                personRepository.save(person),
+                userRepository.save(user),
                 HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable("id") long id, @RequestBody Person person) {
-        if (person.getId() != id) {
+    public ResponseEntity<Void> update(@PathVariable("id") long id, @RequestBody User user) {
+        if (user.getId() != id) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        if (!personRepository.existsById(id)) {
-            personRepository.save(person);
+        if (!userRepository.existsById(id)) {
+            userRepository.save(user);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
-        personRepository.save(person);
+        userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") int id) {
-        personRepository.deleteById((long) id);
+        userRepository.deleteById((long) id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
