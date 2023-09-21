@@ -32,11 +32,11 @@ public class AuthenticationController {
         return userMapper.mapToDto(user);
     }
 
-    @RequestMapping(path = "/logout")
-    public String logout(HttpServletRequest request) {
-        request.getSession(true).invalidate();
-
-        return "redirect:/login";
-    }
+//    @RequestMapping(path = "/logout")
+//    public String logout(HttpServletRequest request) {
+//        request.getSession(true).invalidate();
+//
+//        return "redirect:/login";
+//    }
 
 }

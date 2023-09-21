@@ -1,10 +1,8 @@
 package com.challange.talkspace.controller;
 
-import com.challange.talkspace.dto.mapper.UserMapper;
 import com.challange.talkspace.dto.request.UserRequestDto;
 import com.challange.talkspace.security.CustomUserDetailsService;
 import com.challange.talkspace.security.JwtUtilities;
-import com.challange.talkspace.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -28,7 +25,6 @@ public class LoginController {
 
     @PostMapping( "/auth/login")
     public ResponseEntity<?> login(@RequestBody UserRequestDto dto) {
-        //++ не знаю чи потрібно скопійовано з інших джерел
         final Authentication authentication =
                 authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
@@ -38,8 +34,6 @@ public class LoginController {
                 );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final UserDetails userDetails = userDetailsService.loadUserByUsername(dto.getUserName());
-        //--
-        //User user = authService.login(dto.getUserName(), dto.getPassword());
         var roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
@@ -53,13 +47,5 @@ public class LoginController {
     public ResponseEntity<?> handleException(Exception e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
     }
-
-
-//    @RequestMapping(path = "/logout")
-//    public String logout(HttpServletRequest request) {
-//        request.getSession(true).invalidate();
-//
-//        return "Logout ok";
-//    }
 
 }

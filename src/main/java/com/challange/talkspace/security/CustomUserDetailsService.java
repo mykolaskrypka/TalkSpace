@@ -11,14 +11,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-        private final UserService userService ;
+        private final UserService userService;
 
         @Override
         public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {

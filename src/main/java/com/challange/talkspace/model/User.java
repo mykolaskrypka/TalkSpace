@@ -13,6 +13,7 @@ import java.util.Set;
 //@EqualsAndHashCode(of = ("id"))
 public class User {
 
+    @EqualsAndHashCode.Exclude
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,10 +38,7 @@ public class User {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToMany
-    @JoinTable(name = "groups_users",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    @ManyToMany(mappedBy = "people", cascade = CascadeType.MERGE)
     private Set<ChatGroup> chatGroups;
 
     @ManyToMany(fetch = FetchType.EAGER)

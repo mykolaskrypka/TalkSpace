@@ -19,6 +19,16 @@ public class ChatGroupMapper implements ResponseDtoMapper<ChatGroupResponseDto, 
         return responseDto;
     }
 
+    public ChatGroupResponseDto mapToDtoWithoutPeople(ChatGroup chatGroup) {
+        ChatGroupResponseDto responseDto = new ChatGroupResponseDto();
+        responseDto.setId(chatGroup.getId());
+        responseDto.setChatType(chatGroup.getChatType());
+        responseDto.setName(chatGroup.getName());
+        responseDto.setDescription(chatGroup.getDescription());
+        //responseDto.setPeople(chatGroup.getPeople());
+        return responseDto;
+    }
+
     @Override
     public ChatGroup mapToModel(ChatGroupRequestDto chatGroupRequestDto) {
         ChatGroup chatGroup = new ChatGroup();
