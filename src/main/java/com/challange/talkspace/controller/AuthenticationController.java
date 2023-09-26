@@ -4,7 +4,6 @@ import com.challange.talkspace.dto.response.UserResponseDto;
 import com.challange.talkspace.model.User;
 import com.challange.talkspace.service.AuthenticationService;
 import com.challange.talkspace.dto.mapper.UserMapper;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
