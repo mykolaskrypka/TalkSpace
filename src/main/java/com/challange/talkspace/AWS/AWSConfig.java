@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 //@Configuration
 //public class AWSConfig {
-//    @Value("${applicationRem.properties.cloud.s3.credentials.accessKey}")
+//    @Value("${application.properties.cloud.s3.credentials.accessKey}")
 //    private String awsId;
 //    @Value("${cloud.s3.credentials.secretKey}")
 //    private String awsKey;

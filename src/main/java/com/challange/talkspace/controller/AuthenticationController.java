@@ -22,7 +22,12 @@ public class AuthenticationController {
 
     @GetMapping("/getHello")
     public String getHello() {
-        return "Hello, TalkSpacers!!!";
+        return "Hello, TalkSpacers!!";
+    }
+
+    @GetMapping("/getHello2")
+    public String getHello2() {
+        return "Hello, TalkSpacers!!2";
     }
 
     @PostMapping("/register")
